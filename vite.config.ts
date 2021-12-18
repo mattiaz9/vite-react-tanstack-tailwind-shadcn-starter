@@ -1,7 +1,7 @@
 import fs from "fs"
 import stringHash from "string-hash"
 import { defineConfig } from "vite"
-import reactRefresh from "@vitejs/plugin-react-refresh"
+import react from "@vitejs/plugin-react"
 import svgr from "vite-plugin-svgr"
 import tsconfigPaths from "vite-tsconfig-paths"
 import eslintPlugin from "vite-plugin-eslint"
@@ -29,7 +29,7 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     tsconfigPaths({ root: "." }),
-    reactRefresh(),
+    react(),
     svgr(),
     eslintPlugin({ cache: false }),
   ]
