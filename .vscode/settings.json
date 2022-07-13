@@ -7,30 +7,20 @@
   },
   "files.trimTrailingWhitespace": false,
   "path-autocomplete.pathMappings": {
-    "@assets": "${folder}/src/assets",
-    "@components": "${folder}/src/components",
-    "@context": "${folder}/src/context",
-    "@hooks": "${folder}/src/hooks",
-    "@pages": "${folder}/src/pages",
-    "@styles": "${folder}/src/styles",
-    "@typings": "${folder}/src/typings",
-    "@utils": "${folder}/src/utils"
+    "@/": "${folder}/"
   },
-  "eslint.validate": [
-    "javascript",
-    "typescript",
-    "typescriptreact"
-  ],
+  "eslint.validate": ["javascript", "typescript", "typescriptreact"],
   "[javascript]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[typescriptreact]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[scss]": {
-    "tailwindCSS.validate": true
-  },
+    "tailwindCSS.validate": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

@@ -16,11 +16,11 @@ module.exports = {
           "function",
           "return",
           "if",
-          "else"
-        ]
-      }
+          "else",
+        ],
+      },
     ],
     "declaration-block-trailing-semicolon": null,
-    "no-descending-specificity": null
-  }
+    "no-descending-specificity": null,
+  },
 }

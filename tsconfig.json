@@ -4,12 +4,9 @@
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "types": ["vite/client"],
     "plugins": [{ "name": "typescript-plugin-css-modules" }],
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
-      "@assets/*": ["assets/*"],
-      "@components/*": ["components/*"],
-      "@pages/*": ["pages/*"],
-      "@scss/*": ["scss/*"],
+      "@/*": ["src/*"]
     },
     "allowJs": false,
     "skipLibCheck": false,
@@ -28,9 +25,10 @@
     "jsx": "react"
   },
   "include": ["./src"],
-  "exclude": [
-    "build",
-    "node_modules",
-    "public"
+  "exclude": ["build", "node_modules", "public"],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
   ]
 }

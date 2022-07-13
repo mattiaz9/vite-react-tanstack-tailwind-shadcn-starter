@@ -3,9 +3,7 @@
     "browser": true,
     "es2021": true
   },
-  "extends": [
-    "plugin:react/recommended"
-  ],
+  "extends": ["plugin:react/recommended", "prettier"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
@@ -14,35 +12,8 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": [
-    "react",
-    "@typescript-eslint"
-  ],
+  "plugins": ["react", "@typescript-eslint", "prettier"],
   "rules": {
-    "max-len": [
-      "warn",
-      {
-        "code": 120
-      }
-    ],
-    "semi": ["error", "never"],
-    "react/prop-types": "off",
-    "react/react-in-jsx-scope": "off",
-    "@typescript-eslint/indent": [
-      "error",
-      2,
-      {
-        "SwitchCase": 1,
-        "ignoredNodes": ["ConditionalExpression"],
-        "ignoreComments": true
-      }
-    ],
-    "quotes": [
-      "warn",
-      "double",
-      {
-        "allowTemplateLiterals": true
-      }
-    ]
+    "prettier/prettier": ["warn"]
   }
 }
