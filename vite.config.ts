@@ -1,4 +1,5 @@
-import fs from "fs"
+import fs from "node:fs"
+import { resolve } from "node:path"
 import stringHash from "string-hash"
 import { defineConfig } from "vite"
 import react from "@vitejs/plugin-react"
@@ -15,7 +16,11 @@ export default defineConfig(({ mode }) => ({
         cert: fs.readFileSync("ssl/cert.pem"),
       },
     port: 3000,
-    base: "localhost",
+  },
+  resolve: {
+    alias: {
+      "@": resolve("src"),
+    },
   },
   css: {
     modules: {

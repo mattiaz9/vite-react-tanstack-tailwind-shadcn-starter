@@ -24,7 +24,7 @@
     "noEmit": true,
     "jsx": "react"
   },
-  "include": ["./src"],
+  "include": ["src", "typings"],
   "exclude": ["build", "node_modules", "public"],
   "references": [
     {
