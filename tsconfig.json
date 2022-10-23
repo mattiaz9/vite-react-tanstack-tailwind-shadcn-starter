@@ -9,7 +9,8 @@
       "@/*": ["src/*"]
     },
     "allowJs": false,
-    "skipLibCheck": false,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "strict": true,
