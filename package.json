@@ -6,7 +6,7 @@
     "dev": "vite --host",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "format": "prettier --write --ignore-path .gitignore ."
+    "format": "prettier --write src '!**/*.{ts,tsx}'"
   },
   "dependencies": {
     "react": "18.2.0",
