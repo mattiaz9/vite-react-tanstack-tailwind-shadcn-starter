@@ -1,10 +1,11 @@
 import fs from "node:fs"
 import { resolve } from "node:path"
-import stringHash from "string-hash"
-import { defineConfig } from "vite"
 import react from "@vitejs/plugin-react"
-import svgr from "vite-plugin-svgr"
+import unfonts from "unplugin-fonts/vite"
+import { defineConfig } from "vite"
+import checker from "vite-plugin-checker"
 import eslintPlugin from "vite-plugin-eslint"
+import svgr from "vite-plugin-svgr"
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -15,22 +16,33 @@ export default defineConfig(({ mode }) => ({
         key: fs.readFileSync("ssl/key.pem"),
         cert: fs.readFileSync("ssl/cert.pem"),
       },
-    port: 3000,
   },
   resolve: {
     alias: {
       "@": resolve("src"),
     },
   },
-  css: {
-    modules: {
-      localsConvention: "camelCaseOnly",
-      generateScopedName: (name, filename, css) => {
-        if (name === "dark") return "dark"
-        const hash = stringHash(css).toString(36).substr(0, 5)
-        return `_${name}_${hash}`
+  plugins: [
+    react(),
+    svgr(),
+    unfonts({
+      custom: {
+        families: [
+          {
+            name: "Geist",
+            src: "./fonts/geist-sans/*.woff2",
+          },
+          {
+            name: "Geist Mono",
+            src: "./fonts/geist-mono/*.woff2",
+          },
+        ],
       },
-    },
-  },
-  plugins: [react(), svgr(), eslintPlugin({ cache: false })],
+    }),
+    checker({
+      typescript: true,
+      overlay: false,
+    }),
+    eslintPlugin({ cache: false }),
+  ],
 }))

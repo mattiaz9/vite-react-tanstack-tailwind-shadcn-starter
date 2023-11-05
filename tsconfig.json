@@ -2,8 +2,9 @@
   "compilerOptions": {
     "target": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "module": "ESNext",
+    "moduleResolution": "Node",
     "types": ["vite/client"],
-    "plugins": [{ "name": "typescript-plugin-css-modules" }],
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
@@ -15,17 +16,16 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "ESNext",
-    "moduleResolution": "Node",
+    "noUncheckedIndexedAccess": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noImplicitAny": true,
     "noImplicitReturns": false,
     "noImplicitThis": false,
     "noEmit": true,
-    "jsx": "react"
+    "jsx": "react-jsx"
   },
-  "include": ["src", "typings"],
+  "include": ["src", "typings", "vite.config.ts", ".eslintrc.cjs", "postcss.config.cjs", "prettier.config.mjs", "tailwind.config.ts"],
   "exclude": ["build", "node_modules", "public"],
   "references": [
     {
