@@ -1,12 +1,15 @@
 /** @type {import('prettier').Config & import('prettier-plugin-tailwindcss').PluginOptions & import('@ianvs/prettier-plugin-sort-imports').PluginConfig} */
 const config = {
   semi: false,
+  arrowParens: "always",
+  trailingComma: "all",
   importOrder: [
     "^react",
     "<THIRD_PARTY_MODULES>",
     "",
     ".s?css$",
     "^lucide-react",
+    "^@icons-pack",
     "^@heroicons",
     "^@/assets",
     "",

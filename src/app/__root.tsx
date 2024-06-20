@@ -1,9 +1,9 @@
-import { Link, Outlet } from "@tanstack/react-router"
+import { createRootRoute, Link, Outlet } from "@tanstack/react-router"
 
 import "unfonts.css"
 import "./globals.css"
 
-import { GithubIcon } from "lucide-react"
+import { SiGithub } from "@icons-pack/react-simple-icons"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -13,13 +13,21 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
+import { ScrollArea } from "@/components/ui/scroll-area"
 
-export default function Layout() {
+export const Route = createRootRoute({
+  component: RootLayout,
+  notFoundComponent: () => {
+    return <p>404 | not found</p>
+  },
+})
+
+export default function RootLayout() {
   return (
-    <div className="relative flex h-[100dvh] w-full flex-col overflow-hidden">
-      <header className="flex w-full border-b">
+    <div className="relative flex h-[100dvh] w-full flex-col overflow-hidden px-0.5">
+      <header className="fixed inset-x-0 top-0 z-10 flex h-14 w-full border-b bg-card/80 backdrop-blur-sm">
         <div className="container flex items-center py-2">
-          <NavigationMenu>
+          <NavigationMenu className="-ml-4">
             <NavigationMenuList>
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
@@ -30,8 +38,8 @@ export default function Layout() {
               </NavigationMenuItem>
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
-                  <Link className={navigationMenuTriggerStyle()} to="/posts">
-                    Posts
+                  <Link className={navigationMenuTriggerStyle()} to="/blog">
+                    Blog
                   </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
@@ -50,16 +58,21 @@ export default function Layout() {
                 target="_blank"
                 rel="noreferrer"
               >
-                <GithubIcon size={18} className="text-muted-foreground" />
+                <SiGithub size={18} className="text-muted-foreground" />
               </a>
             </Button>
           </div>
         </div>
       </header>
 
-      <main className="container my-6 flex flex-1 overflow-hidden">
-        <Outlet />
-      </main>
+      <ScrollArea
+        className="flex h-full w-full flex-col pt-14 [&>[data-orientation=vertical]]:!top-14 [&>[data-orientation=vertical]]:!h-auto"
+        type="scroll"
+      >
+        <main className="flex flex-1 overflow-x-hidden">
+          <Outlet />
+        </main>
+      </ScrollArea>
     </div>
   )
 }

@@ -37,7 +37,7 @@
     --border: 220 13% 91%;
     --input: 220 13% 91%;
     --ring: 224 71.4% 4.1%;
-    --ring-offset: var(--background);
+    --current-background: var(--background);
 
     --radius: 0.5rem;
   }

@@ -27,7 +27,7 @@ export default {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        "ring-offset": "hsl(var(--ring-offset))",
+        "current-background": "hsl(var(--current-background))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
@@ -93,23 +93,16 @@ export default {
     },
   },
   plugins: [
+    require("@tailwindcss/container-queries"),
+    require("@tailwindcss/typography"),
     require("tailwindcss-animate"),
-    plugin(({ addUtilities, matchUtilities, theme }) => {
-      addUtilities({
-        ".absolute-center": {
-          position: "absolute",
-          left: "50%",
-          top: "50%",
-          "--tw-translate-x": "-50%",
-          "--tw-translate-y": "-50%",
-          transform: "var(--tw-transform)",
-        },
-      })
-
+    require("tailwindcss-interaction-media"),
+    require("tailwindcss-safe-area"),
+    plugin(({ matchUtilities, theme }) => {
       matchUtilities(
         {
           "ring-offset-reset": (value) => ({
-            "--ring-offset": value.match(/^hsl\((.+)\)$/)?.[1] ?? value,
+            "--current-background": value.match(/^hsl\((.+)\)$/)?.[1] ?? value,
           }),
         },
         {

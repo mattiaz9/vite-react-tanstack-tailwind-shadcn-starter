@@ -1,22 +1,18 @@
 import { z } from "zod"
 
-import { NotFoundError } from "./errors"
+import { createDedupeFn } from "@/lib/utils"
 
-export async function fetchPost(id: string) {
-  const resp = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+export const fetchPost = createDedupeFn(
+  z.object({ id: z.number() }),
+  async ({ id }) => {
+    await new Promise((resolve) => setTimeout(resolve, 2000))
 
-  if (resp.status === 404) {
-    throw new NotFoundError("Post not found")
-  }
-
-  const data = await resp.json()
-  const post = z
-    .object({
-      id: z.number(),
-      title: z.string(),
-      body: z.string(),
-      userId: z.number(),
-    })
-    .parse(data)
-  return post
-}
+    return {
+      id,
+      title: "Lorem ipsum dolor sit amet",
+      body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista probare, quae sunt a te dicta? Duo Reges: constructio interrete.
+        Quae cum dixisset, finem ille. Quae cum essent dicta, discessimus.
+        Quae similitudo in genere etiam humano apparet. Quae quidem vel cum periculo est quaerenda vobis;`,
+    }
+  },
+)
