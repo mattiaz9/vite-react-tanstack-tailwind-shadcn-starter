@@ -6,11 +6,13 @@ import { createRouter, RouterProvider } from "@tanstack/react-router"
 import { routeTree } from "./routes.gen"
 
 // Set up a Router instance
+const isBotAgent = /bot|googlebot|crawler|spider|robot|crawling/i.test(
+  navigator.userAgent,
+)
 const router = createRouter({
   routeTree,
   defaultPreload: "intent",
-  defaultPendingMs: 0,
-  defaultPendingMinMs: 0,
+  defaultPendingMinMs: isBotAgent ? 100 : 0,
 })
 
 // Register things for typesafety

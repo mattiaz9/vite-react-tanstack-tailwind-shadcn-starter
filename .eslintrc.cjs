@@ -19,6 +19,12 @@ const config = {
     "@typescript-eslint/array-type": "off",
     "@typescript-eslint/consistent-type-definitions": "off",
     "@typescript-eslint/consistent-type-imports": "warn",
+    "@typescript-eslint/prefer-nullish-coalescing": [
+      "error",
+      {
+        ignorePrimitives: true,
+      },
+    ],
     "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
     "@typescript-eslint/no-empty-interface": "off",
     "@typescript-eslint/no-misused-promises": [

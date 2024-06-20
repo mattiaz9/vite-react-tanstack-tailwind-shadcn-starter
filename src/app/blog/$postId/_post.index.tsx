@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router"
 import { z } from "zod"
 
+import { Seo } from "@/components/layout/seo"
 import { Skeleton } from "@/components/ui/skeleton"
 import { fetchPost } from "@/queries/fetch-post"
 
@@ -26,5 +27,10 @@ export const Route = createFileRoute("/blog/$postId/_post/")({
 function PostPage() {
   const { post } = Route.useLoaderData()
 
-  return <article className="prose">{post.body}</article>
+  return (
+    <>
+      <Seo title={post.title} />
+      <article className="prose">{post.body}</article>
+    </>
+  )
 }

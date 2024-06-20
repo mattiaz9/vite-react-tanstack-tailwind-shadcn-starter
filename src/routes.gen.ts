@@ -13,7 +13,8 @@ import { createFileRoute } from "@tanstack/react-router"
 // Import Routes
 
 import { Route as rootRoute } from "./app/__root"
-import { Route as RouteImport } from "./app/route"
+import { Route as BaseImport } from "./app/_base"
+import { Route as BaseIndexImport } from "./app/_base.index"
 import { Route as BlogPostsImport } from "./app/blog/_posts"
 import { Route as BlogPostsIndexImport } from "./app/blog/_posts.index"
 import { Route as BlogPostIdPostImport } from "./app/blog/$postId/_post"
@@ -31,14 +32,19 @@ const BlogRoute = BlogImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const RouteRoute = RouteImport.update({
-  path: "/",
+const BaseRoute = BaseImport.update({
+  id: "/_base",
   getParentRoute: () => rootRoute,
 } as any)
 
 const BlogPostIdRoute = BlogPostIdImport.update({
   path: "/$postId",
   getParentRoute: () => BlogRoute,
+} as any)
+
+const BaseIndexRoute = BaseIndexImport.update({
+  path: "/",
+  getParentRoute: () => BaseRoute,
 } as any)
 
 const BlogPostsRoute = BlogPostsImport.update({
@@ -65,11 +71,11 @@ const BlogPostIdPostIndexRoute = BlogPostIdPostIndexImport.update({
 
 declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    "/": {
-      id: "/"
-      path: "/"
-      fullPath: "/"
-      preLoaderRoute: typeof RouteImport
+    "/_base": {
+      id: "/_base"
+      path: ""
+      fullPath: ""
+      preLoaderRoute: typeof BaseImport
       parentRoute: typeof rootRoute
     }
     "/blog": {
@@ -85,6 +91,13 @@ declare module "@tanstack/react-router" {
       fullPath: "/blog"
       preLoaderRoute: typeof BlogPostsImport
       parentRoute: typeof BlogRoute
+    }
+    "/_base/": {
+      id: "/_base/"
+      path: "/"
+      fullPath: "/"
+      preLoaderRoute: typeof BaseIndexImport
+      parentRoute: typeof BaseImport
     }
     "/blog/$postId": {
       id: "/blog/$postId"
@@ -120,7 +133,7 @@ declare module "@tanstack/react-router" {
 // Create and export the route tree
 
 export const routeTree = rootRoute.addChildren({
-  RouteRoute,
+  BaseRoute: BaseRoute.addChildren({ BaseIndexRoute }),
   BlogRoute: BlogRoute.addChildren({
     BlogPostsRoute: BlogPostsRoute.addChildren({ BlogPostsIndexRoute }),
     BlogPostIdRoute: BlogPostIdRoute.addChildren({
@@ -139,12 +152,15 @@ export const routeTree = rootRoute.addChildren({
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/",
+        "/_base",
         "/blog"
       ]
     },
-    "/": {
-      "filePath": "route.tsx"
+    "/_base": {
+      "filePath": "_base.tsx",
+      "children": [
+        "/_base/"
+      ]
     },
     "/blog": {
       "filePath": "blog",
@@ -159,6 +175,10 @@ export const routeTree = rootRoute.addChildren({
       "children": [
         "/blog/_posts/"
       ]
+    },
+    "/_base/": {
+      "filePath": "_base.index.tsx",
+      "parent": "/_base"
     },
     "/blog/$postId": {
       "filePath": "blog/$postId",
