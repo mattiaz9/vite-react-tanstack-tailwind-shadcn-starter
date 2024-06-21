@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
 
-export const Route = createFileRoute("/(www)/_base/blog/_posts/")({
+export const Route = createFileRoute("/_base/blog/_posts/")({
   component: PostsListPage,
   pendingComponent: () => (
     <>

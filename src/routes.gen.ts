@@ -13,134 +13,119 @@ import { createFileRoute } from "@tanstack/react-router"
 // Import Routes
 
 import { Route as rootRoute } from "./app/__root"
-import { Route as wwwBaseImport } from "./app/(www)/_base"
-import { Route as wwwBaseIndexImport } from "./app/(www)/_base.index"
-import { Route as wwwBaseBlogPostsImport } from "./app/(www)/_base.blog/_posts"
-import { Route as wwwBaseBlogPostsIndexImport } from "./app/(www)/_base.blog/_posts.index"
-import { Route as wwwBaseBlogPostIdPostImport } from "./app/(www)/_base.blog/$postId/_post"
-import { Route as wwwBaseBlogPostIdPostIndexImport } from "./app/(www)/_base.blog/$postId/_post.index"
+import { Route as BaseImport } from "./app/_base"
+import { Route as BaseIndexImport } from "./app/_base/index"
+import { Route as BaseBlogPostsImport } from "./app/_base/blog/_posts"
+import { Route as BaseBlogPostsIndexImport } from "./app/_base/blog/_posts.index"
+import { Route as BaseBlogPostIdPostImport } from "./app/_base/blog/$postId/_post"
+import { Route as BaseBlogPostIdPostIndexImport } from "./app/_base/blog/$postId/_post.index"
 
 // Create Virtual Routes
 
-const wwwImport = createFileRoute("/(www)")()
-const wwwBaseBlogImport = createFileRoute("/(www)/_base/blog")()
-const wwwBaseBlogPostIdImport = createFileRoute("/(www)/_base/blog/$postId")()
+const BaseBlogImport = createFileRoute("/_base/blog")()
+const BaseBlogPostIdImport = createFileRoute("/_base/blog/$postId")()
 
 // Create/Update Routes
 
-const wwwRoute = wwwImport.update({
-  id: "/(www)",
+const BaseRoute = BaseImport.update({
+  id: "/_base",
   getParentRoute: () => rootRoute,
 } as any)
 
-const wwwBaseRoute = wwwBaseImport.update({
-  id: "/_base",
-  getParentRoute: () => wwwRoute,
-} as any)
-
-const wwwBaseBlogRoute = wwwBaseBlogImport.update({
+const BaseBlogRoute = BaseBlogImport.update({
   path: "/blog",
-  getParentRoute: () => wwwBaseRoute,
+  getParentRoute: () => BaseRoute,
 } as any)
 
-const wwwBaseIndexRoute = wwwBaseIndexImport.update({
+const BaseIndexRoute = BaseIndexImport.update({
   path: "/",
-  getParentRoute: () => wwwBaseRoute,
+  getParentRoute: () => BaseRoute,
 } as any)
 
-const wwwBaseBlogPostIdRoute = wwwBaseBlogPostIdImport.update({
+const BaseBlogPostIdRoute = BaseBlogPostIdImport.update({
   path: "/$postId",
-  getParentRoute: () => wwwBaseBlogRoute,
+  getParentRoute: () => BaseBlogRoute,
 } as any)
 
-const wwwBaseBlogPostsRoute = wwwBaseBlogPostsImport.update({
+const BaseBlogPostsRoute = BaseBlogPostsImport.update({
   id: "/_posts",
-  getParentRoute: () => wwwBaseBlogRoute,
+  getParentRoute: () => BaseBlogRoute,
 } as any)
 
-const wwwBaseBlogPostsIndexRoute = wwwBaseBlogPostsIndexImport.update({
+const BaseBlogPostsIndexRoute = BaseBlogPostsIndexImport.update({
   path: "/",
-  getParentRoute: () => wwwBaseBlogPostsRoute,
+  getParentRoute: () => BaseBlogPostsRoute,
 } as any)
 
-const wwwBaseBlogPostIdPostRoute = wwwBaseBlogPostIdPostImport.update({
+const BaseBlogPostIdPostRoute = BaseBlogPostIdPostImport.update({
   id: "/_post",
-  getParentRoute: () => wwwBaseBlogPostIdRoute,
+  getParentRoute: () => BaseBlogPostIdRoute,
 } as any)
 
-const wwwBaseBlogPostIdPostIndexRoute = wwwBaseBlogPostIdPostIndexImport.update(
-  {
-    path: "/",
-    getParentRoute: () => wwwBaseBlogPostIdPostRoute,
-  } as any,
-)
+const BaseBlogPostIdPostIndexRoute = BaseBlogPostIdPostIndexImport.update({
+  path: "/",
+  getParentRoute: () => BaseBlogPostIdPostRoute,
+} as any)
 
 // Populate the FileRoutesByPath interface
 
 declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    "/(www)": {
-      id: "/"
-      path: "/"
-      fullPath: "/"
-      preLoaderRoute: typeof wwwImport
+    "/_base": {
+      id: "/_base"
+      path: ""
+      fullPath: ""
+      preLoaderRoute: typeof BaseImport
       parentRoute: typeof rootRoute
     }
-    "/(www)/_base": {
-      id: "/_base"
-      path: "/"
-      fullPath: "/"
-      preLoaderRoute: typeof wwwBaseImport
-      parentRoute: typeof wwwRoute
-    }
-    "/(www)/_base/": {
+    "/_base/": {
       id: "/_base/"
       path: "/"
       fullPath: "/"
-      preLoaderRoute: typeof wwwBaseIndexImport
-      parentRoute: typeof wwwBaseImport
+      preLoaderRoute: typeof BaseIndexImport
+      parentRoute: typeof BaseImport
     }
-    "/(www)/_base/blog": {
+    "/_base/blog": {
       id: "/_base/blog"
       path: "/blog"
       fullPath: "/blog"
-      preLoaderRoute: typeof wwwBaseBlogImport
-      parentRoute: typeof wwwBaseImport
+      preLoaderRoute: typeof BaseBlogImport
+      parentRoute: typeof BaseImport
     }
-    "/(www)/_base/blog/_posts": {
+    "/_base/blog/_posts": {
       id: "/_base/blog/_posts"
       path: "/blog"
       fullPath: "/blog"
-      preLoaderRoute: typeof wwwBaseBlogPostsImport
-      parentRoute: typeof wwwBaseBlogRoute
+      preLoaderRoute: typeof BaseBlogPostsImport
+      parentRoute: typeof BaseBlogRoute
     }
-    "/(www)/_base/blog/$postId": {
+    "/_base/blog/$postId": {
       id: "/_base/blog/$postId"
       path: "/$postId"
       fullPath: "/blog/$postId"
-      preLoaderRoute: typeof wwwBaseBlogPostIdImport
-      parentRoute: typeof wwwBaseBlogImport
+      preLoaderRoute: typeof BaseBlogPostIdImport
+      parentRoute: typeof BaseBlogImport
     }
-    "/(www)/_base/blog/$postId/_post": {
+    "/_base/blog/$postId/_post": {
       id: "/_base/blog/$postId/_post"
       path: "/$postId"
       fullPath: "/blog/$postId"
-      preLoaderRoute: typeof wwwBaseBlogPostIdPostImport
-      parentRoute: typeof wwwBaseBlogPostIdRoute
+      preLoaderRoute: typeof BaseBlogPostIdPostImport
+      parentRoute: typeof BaseBlogPostIdRoute
     }
-    "/(www)/_base/blog/_posts/": {
+    "/_base/blog/_posts/": {
       id: "/_base/blog/_posts/"
       path: "/"
       fullPath: "/blog/"
-      preLoaderRoute: typeof wwwBaseBlogPostsIndexImport
-      parentRoute: typeof wwwBaseBlogPostsImport
+      preLoaderRoute: typeof BaseBlogPostsIndexImport
+      parentRoute: typeof BaseBlogPostsImport
     }
-    "/(www)/_base/blog/$postId/_post/": {
+    "/_base/blog/$postId/_post/": {
       id: "/_base/blog/$postId/_post/"
       path: "/"
       fullPath: "/blog/$postId/"
-      preLoaderRoute: typeof wwwBaseBlogPostIdPostIndexImport
-      parentRoute: typeof wwwBaseBlogPostIdPostImport
+      preLoaderRoute: typeof BaseBlogPostIdPostIndexImport
+      parentRoute: typeof BaseBlogPostIdPostImport
     }
   }
 }
@@ -148,17 +133,15 @@ declare module "@tanstack/react-router" {
 // Create and export the route tree
 
 export const routeTree = rootRoute.addChildren({
-  wwwRoute: wwwRoute.addChildren({
-    wwwBaseRoute: wwwBaseRoute.addChildren({
-      wwwBaseIndexRoute,
-      wwwBaseBlogRoute: wwwBaseBlogRoute.addChildren({
-        wwwBaseBlogPostsRoute: wwwBaseBlogPostsRoute.addChildren({
-          wwwBaseBlogPostsIndexRoute,
-        }),
-        wwwBaseBlogPostIdRoute: wwwBaseBlogPostIdRoute.addChildren({
-          wwwBaseBlogPostIdPostRoute: wwwBaseBlogPostIdPostRoute.addChildren({
-            wwwBaseBlogPostIdPostIndexRoute,
-          }),
+  BaseRoute: BaseRoute.addChildren({
+    BaseIndexRoute,
+    BaseBlogRoute: BaseBlogRoute.addChildren({
+      BaseBlogPostsRoute: BaseBlogPostsRoute.addChildren({
+        BaseBlogPostsIndexRoute,
+      }),
+      BaseBlogPostIdRoute: BaseBlogPostIdRoute.addChildren({
+        BaseBlogPostIdPostRoute: BaseBlogPostIdPostRoute.addChildren({
+          BaseBlogPostIdPostIndexRoute,
         }),
       }),
     }),
@@ -173,29 +156,22 @@ export const routeTree = rootRoute.addChildren({
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/"
-      ]
-    },
-    "/": {
-      "filePath": "(www)",
-      "children": [
         "/_base"
       ]
     },
     "/_base": {
-      "filePath": "(www)/_base.tsx",
-      "parent": "/",
+      "filePath": "_base.tsx",
       "children": [
         "/_base/",
         "/_base/blog"
       ]
     },
     "/_base/": {
-      "filePath": "(www)/_base.index.tsx",
+      "filePath": "_base/index.tsx",
       "parent": "/_base"
     },
     "/_base/blog": {
-      "filePath": "(www)/_base.blog",
+      "filePath": "_base/blog",
       "parent": "/_base",
       "children": [
         "/_base/blog/_posts",
@@ -203,32 +179,32 @@ export const routeTree = rootRoute.addChildren({
       ]
     },
     "/_base/blog/_posts": {
-      "filePath": "(www)/_base.blog/_posts.tsx",
+      "filePath": "_base/blog/_posts.tsx",
       "parent": "/_base/blog",
       "children": [
         "/_base/blog/_posts/"
       ]
     },
     "/_base/blog/$postId": {
-      "filePath": "(www)/_base.blog/$postId",
+      "filePath": "_base/blog/$postId",
       "parent": "/_base/blog",
       "children": [
         "/_base/blog/$postId/_post"
       ]
     },
     "/_base/blog/$postId/_post": {
-      "filePath": "(www)/_base.blog/$postId/_post.tsx",
+      "filePath": "_base/blog/$postId/_post.tsx",
       "parent": "/_base/blog/$postId",
       "children": [
         "/_base/blog/$postId/_post/"
       ]
     },
     "/_base/blog/_posts/": {
-      "filePath": "(www)/_base.blog/_posts.index.tsx",
+      "filePath": "_base/blog/_posts.index.tsx",
       "parent": "/_base/blog/_posts"
     },
     "/_base/blog/$postId/_post/": {
-      "filePath": "(www)/_base.blog/$postId/_post.index.tsx",
+      "filePath": "_base/blog/$postId/_post.index.tsx",
       "parent": "/_base/blog/$postId/_post"
     }
   }
