@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/navigation-menu"
 import { ScrollArea } from "@/components/ui/scroll-area"
 
-export const Route = createFileRoute("/_base")({
+export const Route = createFileRoute("/(www)/_base")({
   component: BaseLayout,
 })
 

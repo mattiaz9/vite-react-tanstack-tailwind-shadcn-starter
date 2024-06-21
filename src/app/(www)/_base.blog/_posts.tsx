@@ -2,7 +2,7 @@ import { createFileRoute, Outlet } from "@tanstack/react-router"
 
 import { Seo } from "@/components/layout/seo"
 
-export const Route = createFileRoute("/blog/_posts")({
+export const Route = createFileRoute("/(www)/_base/blog/_posts")({
   component: PostsLayout,
 })
 

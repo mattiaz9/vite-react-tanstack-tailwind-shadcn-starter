@@ -6,7 +6,7 @@ import { Seo } from "@/components/layout/seo"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
-export const Route = createFileRoute("/_base/")({
+export const Route = createFileRoute("/(www)/_base/")({
   component: HomePage,
 })
 

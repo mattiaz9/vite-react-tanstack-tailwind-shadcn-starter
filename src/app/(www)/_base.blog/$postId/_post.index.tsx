@@ -5,7 +5,7 @@ import { Seo } from "@/components/layout/seo"
 import { Skeleton } from "@/components/ui/skeleton"
 import { fetchPost } from "@/queries/fetch-post"
 
-export const Route = createFileRoute("/blog/$postId/_post/")({
+export const Route = createFileRoute("/(www)/_base/blog/$postId/_post/")({
   parseParams: (params) =>
     z.object({ postId: z.coerce.number().int() }).parse(params),
   stringifyParams: ({ postId }) => ({ postId: `${postId}` }),
