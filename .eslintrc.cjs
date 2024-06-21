@@ -1,16 +1,28 @@
+// @ts-check
+
 /** @type {import("eslint").Linter.Config} */
-const config = {
+module.exports = {
   parser: "@typescript-eslint/parser",
   parserOptions: {
     project: true,
   },
-  plugins: ["@typescript-eslint", "@tanstack/query", "react-refresh"],
+  settings: {
+    react: {
+      version: "detect",
+    },
+  },
+  plugins: [
+    "@typescript-eslint",
+    "@tanstack/query",
+    "react",
+    "react-hooks",
+    "react-refresh",
+  ],
   extends: [
+    "plugin:@typescript-eslint/strict",
+    "plugin:@tanstack/eslint-plugin-query/recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
-    "plugin:@typescript-eslint/recommended-type-checked",
-    "plugin:@typescript-eslint/stylistic-type-checked",
-    "plugin:@tanstack/eslint-plugin-query/recommended",
   ],
   rules: {
     "react/react-in-jsx-scope": "off",
@@ -25,7 +37,15 @@ const config = {
         ignorePrimitives: true,
       },
     ],
-    "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        argsIgnorePattern: "^_",
+        caughtErrorsIgnorePattern: "^_",
+        destructuredArrayIgnorePattern: "^_",
+        varsIgnorePattern: "^_",
+      },
+    ],
     "@typescript-eslint/no-empty-interface": "off",
     "@typescript-eslint/no-misused-promises": [
       2,
@@ -35,5 +55,3 @@ const config = {
     ],
   },
 }
-
-module.exports = config

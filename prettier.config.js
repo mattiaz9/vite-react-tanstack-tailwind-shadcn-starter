@@ -1,5 +1,7 @@
+// @ts-check
+
 /** @type {import('prettier').Config & import('prettier-plugin-tailwindcss').PluginOptions & import('@ianvs/prettier-plugin-sort-imports').PluginConfig} */
-const config = {
+export default {
   semi: false,
   arrowParens: "always",
   trailingComma: "all",
@@ -28,5 +30,3 @@ const config = {
     "prettier-plugin-tailwindcss",
   ],
 }
-
-export default config
