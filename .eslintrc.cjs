@@ -54,4 +54,11 @@ module.exports = {
       },
     ],
   },
+  ignorePatterns: [
+    "dist/",
+    "node_modules/",
+    ".eslintrc.cjs",
+    "prettier.config.js",
+    "postcss.config.js",
+  ],
 }
